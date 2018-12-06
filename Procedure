@@ -1,0 +1,20 @@
+  In this Portfolio two, we are creating two unprivileged alpine lxc-containers C1,C2 in the raspberry pi. 
+We bridge the containers with the host, which is pi, and with each other. 
+Also the networking between host and containers, and between containers is enabled. 
+Through this procedure we want the two containers to comunicate with each other, and more specifically, 
+the C1 container is the one that is open to the web server, and C2 container is the one that sends the script 
+that we have created or whatever we want. The result of that script,which shows random numbers, 
+we can see it in the C1 container and the web server after we make a request with the ip address through the C1 container. 
+If all these are working properly, then we are going to be able to see the results in every device 
+that is connected to the same network through the ip address of the host that we provide them.
+In order to do this we followed the portfolio two instructure from the google drive 
+and some tutorials. 
+The 1st is https://help.ubuntu.com/lts/serverguide/lxc.html
+the second is https://angristan.xyz/setup-network-bridge-lxc-net/
+After these tutorials we did manage to have a bridge between the containers and the host and we can ping each other
+Also we did manage to show the result of the rng.sh script to C1 container.
+We did this with the socat command in the C2 container which is: socat -v -v tcp-listen:8080,fork,reuseaddr exec:/bin/rng.sh
+and then from C1 container we just did curl C2:8080 and the random numbers appeared there. It takes a while sometimes but eventually
+the numbers are there.
+In the web it just appears a webpage from lighttpd server which show us that communicate with the host
+but it is not the result that we want.
